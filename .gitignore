@@ -1,0 +1,4 @@
+objs/
+.vscode
+*.out
+philo
