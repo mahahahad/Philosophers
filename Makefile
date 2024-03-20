@@ -1,6 +1,6 @@
 NAME = philo
 C_FLAGS = -Wall -Werror -Wextra
-SRCS = args.c utils.c utils_2.c philo.c
+SRCS = monitor.c args.c utils.c utils_2.c utils_3.c time.c philo.c
 OBJS_DIR = objs/
 OBJS = $(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 
