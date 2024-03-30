@@ -1,4 +1,7 @@
 objs/
+**/*.o
 .vscode
 *.out
 philo
+!philo/
+!**/*.c
