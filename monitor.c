@@ -6,7 +6,7 @@
 /*   By: maabdull <maabdull@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 11:05:50 by maabdull          #+#    #+#             */
-/*   Updated: 2024/03/20 19:48:29 by maabdull         ###   ########.fr       */
+/*   Updated: 2024/03/30 23:12:40 by maabdull         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ bool	are_philos_alive(t_philo *philos)
 	{
 		if (is_philo_dead(&philos[i]))
 		{
-			log_msg("has died", &philos[i]);
+			log_msg("died", &philos[i]);
 			pthread_mutex_lock(&philos->data->stop_lock);
 			philos[i].is_dead = true;
 			philos->data->terminate = true;

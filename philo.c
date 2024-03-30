@@ -6,7 +6,7 @@
 /*   By: maabdull <maabdull@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 13:36:36 by maabdull          #+#    #+#             */
-/*   Updated: 2024/03/20 23:05:34 by maabdull         ###   ########.fr       */
+/*   Updated: 2024/03/30 23:12:13 by maabdull         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,30 @@
 
 void	p_eat(t_philo *philo)
 {
-	if (philo->num == 0)
-	{
+	// if (philo->num == 1)
+	// {
 		if (pthread_mutex_lock(philo->fork_2))
 			printf("Locking mutex fork 2 failed");
 		log_msg("has taken a fork", philo);
+		if (philo->data->args->num_philos == 1)
+		{
+			accurate_usleep(philo->data->args->time_to_die);
+			pthread_mutex_unlock(philo->fork_2);
+			return ;
+		}
 		if (pthread_mutex_lock(philo->fork_1))
 			printf("Locking mutex fork 1 failed");
 		log_msg("has taken a fork", philo);
-	}
-	else
-	{
-		if (pthread_mutex_lock(philo->fork_1))
-			printf("Locking mutex fork 1 failed");
-		log_msg("has taken a fork", philo);
-		if (pthread_mutex_lock(philo->fork_2))
-			printf("Locking mutex fork 2 failed");
-		log_msg("has taken a fork", philo);
-	}
+	// }
+	// else
+	// {
+	// 	if (pthread_mutex_lock(philo->fork_1))
+	// 		printf("Locking mutex fork 1 failed");
+	// 	log_msg("has taken a fork", philo);
+	// 	if (pthread_mutex_lock(philo->fork_2))
+	// 		printf("Locking mutex fork 2 failed");
+	// 	log_msg("has taken a fork", philo);
+	// }
 	philo->is_eating = true;
 	log_msg("is eating", philo);
 	pthread_mutex_lock(&philo->data->meal_update_lock);
@@ -49,6 +55,8 @@ void	*routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
+	if (philo->num % 2 == 0)
+		accurate_usleep(1);
 	while (!should_stop(philo))
 	{
 		p_eat(philo);
@@ -126,10 +134,10 @@ int	init_data(t_data *data)
 	pthread_mutex_init(&data->write_lock, NULL);
 	pthread_mutex_init(&data->stop_lock, NULL);
 	pthread_mutex_init(&data->meal_update_lock, NULL);
+	if (init_forks(data) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	init_philos_data(data);
 	if (pthread_create(&data->monitor, NULL, monitor_routine, data->philos))
-		return (EXIT_FAILURE);
-	if (init_forks(data) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (init_philos(data) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
