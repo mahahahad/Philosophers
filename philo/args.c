@@ -6,7 +6,7 @@
 /*   By: maabdull <maabdull@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 10:42:13 by maabdull          #+#    #+#             */
-/*   Updated: 2024/03/30 23:27:13 by maabdull         ###   ########.fr       */
+/*   Updated: 2024/04/01 14:11:27 by maabdull         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,18 @@ static int	check_args(char **arg_list)
 
 int	assign_args(t_args *args, char **arg_list)
 {
-	if (ft_atoi(arg_list[0]) < 1)
-		return (ft_error("Philo count must be positive"), EXIT_FAILURE);
 	args->num_philos = ft_atoi(arg_list[0]);
-	if (ft_atoi(arg_list[1]) < 0 || ft_atoi(arg_list[2]) < 0
-		|| ft_atoi(arg_list[3]) < 0)
-		return (ft_error("Time must be positive"), EXIT_FAILURE);
 	args->time_to_die = ft_atoi(arg_list[1]);
 	args->time_to_eat = ft_atoi(arg_list[2]);
 	args->time_to_sleep = ft_atoi(arg_list[3]);
+	if ((int) args->num_philos <= 0 || (long) args->time_to_die <= 0
+		|| (long) args->time_to_eat <= 0 || (long) args->time_to_sleep <= 0)
+		return (ft_error("Please enter valid inputs"), EXIT_FAILURE);
 	if (arg_list[4])
 	{
-		if (ft_atoi(arg_list[4]) < 0)
+		args->max_eat_times = ft_atoi(arg_list[4]);
+		if (args->max_eat_times <= 0)
 			return (ft_error("Max meal count must be positive"), EXIT_FAILURE);
-		else
-			args->max_eat_times = ft_atoi(arg_list[4]);
 	}
 	else
 		args->max_eat_times = -1;

@@ -6,7 +6,7 @@
 /*   By: maabdull <maabdull@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 11:17:13 by maabdull          #+#    #+#             */
-/*   Updated: 2024/03/30 23:20:24 by maabdull         ###   ########.fr       */
+/*   Updated: 2024/04/01 14:21:02 by maabdull         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,29 @@ static int	ft_issign(char c)
 
 int	ft_atoi(const char *str)
 {
-	int	num;
-	int	sign;
+	unsigned long	num;
+	int				sign;
+	int				i;
 
 	num = 0;
 	sign = 1;
-	while (ft_isspace(*str))
-		str++;
-	if (*str == '-')
+	i = 0;
+	while (ft_isspace(str[i]))
+		i++;
+	if (str[i] == '-')
 		sign = -1;
-	if (ft_issign(*str))
-		str++;
-	while (*str)
+	if (ft_issign(str[i]))
+		i++;
+	str += i;
+	while (str[i])
 	{
-		if (ft_isdigit(*str))
-			num = (num * 10) + *(str++) - '0';
+		if (ft_isdigit(str[i]))
+			num = (num * 10) + str[i++] - '0';
 		else
 			break ;
 	}
+	if (check_overflow(str, (sign * num)))
+		return (-1);
 	return (sign * num);
 }
 

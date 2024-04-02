@@ -1,5 +1,5 @@
 NAME = philo
-C_FLAGS = -Wall -Werror -Wextra
+C_FLAGS = -Wall -Werror -Wextra -pthread -g3
 SRCS = monitor.c args.c args_utils.c init.c init_philos.c utils.c utils_2.c utils_3.c time.c end.c philo.c
 OBJS_DIR = objs/
 OBJS = $(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
@@ -18,7 +18,8 @@ $(OBJS_DIR)%.o: %.c
 	@cc $(C_FLAGS) -c $< -o $@
 
 debug: fclean
-	@cc $(C_FLAGS) -fsanitize=address -g3 $(SRCS) -o $(NAME)
+	@cc $(C_FLAGS) -fsanitize=thread -g3 $(SRCS) -o $(NAME)
+	@printf "$(BGREEN)Compiled $(NAME)!$(RESET)\n"
 
 clean:
 	@rm -rf $(OBJS_DIR)

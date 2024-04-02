@@ -6,11 +6,28 @@
 /*   By: maabdull <maabdull@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:24:32 by maabdull          #+#    #+#             */
-/*   Updated: 2024/03/20 23:02:43 by maabdull         ###   ########.fr       */
+/*   Updated: 2024/04/01 14:53:40 by maabdull         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+bool	check_overflow(const char *str, unsigned long num)
+{
+	int	digits;
+	int	i;
+
+	digits = ft_strlen(str);
+	i = 0;
+	while (num > 0)
+	{
+		num /= 10;
+		i++;
+	}
+	if (digits == i)
+		return (false);
+	return (true);
+}
 
 bool	should_stop(t_philo *philo)
 {

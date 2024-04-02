@@ -6,7 +6,7 @@
 /*   By: maabdull <maabdull@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 22:49:13 by maabdull          #+#    #+#             */
-/*   Updated: 2024/03/30 23:33:20 by maabdull         ###   ########.fr       */
+/*   Updated: 2024/04/01 14:21:27 by maabdull         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ struct					s_data
 	bool				terminate;
 };
 
+bool					check_overflow(const char *str, unsigned long num);
 int						ft_atoi(const char *str);
 int						ft_error(char *msg);
 char					**ft_split(char const *s, char c);
@@ -77,7 +78,7 @@ int						init_data(t_data *data);
 int						init_philos(t_data *data);
 t_time					get_time(void);
 void					*monitor_routine(void *arg);
-void					accurate_usleep(t_time milliseconds);
+void					accurate_usleep(t_time milliseconds, t_data *data);
 void					log_msg(char *msg, t_philo *philo);
 bool					should_stop(t_philo *philo);
 int						stop_threads(t_data *data);
