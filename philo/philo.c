@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maabdull <maabdull@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: maabdull <maabdull@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 13:36:36 by maabdull          #+#    #+#             */
-/*   Updated: 2024/04/01 14:12:35 by maabdull         ###   ########.fr       */
+/*   Updated: 2024/04/02 12:24:22 by maabdull         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int	main(int argc, char *argv[])
 	pthread_mutex_destroy(&data.write_lock);
 	pthread_mutex_destroy(&data.stop_lock);
 	pthread_mutex_destroy(&data.meal_update_lock);
-	free_args(args.argument_list);
-	free(data.philos);
-	free(data.forks);
+	free_data(&data);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maabdull <maabdull@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: maabdull <maabdull@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 22:49:13 by maabdull          #+#    #+#             */
-/*   Updated: 2024/04/01 14:21:27 by maabdull         ###   ########.fr       */
+/*   Updated: 2024/04/02 12:20:38 by maabdull         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,6 @@ void					log_msg(char *msg, t_philo *philo);
 bool					should_stop(t_philo *philo);
 int						stop_threads(t_data *data);
 void					destroy_forks(t_data *data);
+void					free_data(t_data *data);
 
 #endif

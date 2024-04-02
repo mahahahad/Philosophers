@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maabdull <maabdull@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: maabdull <maabdull@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 23:28:35 by maabdull          #+#    #+#             */
-/*   Updated: 2024/03/30 23:33:14 by maabdull         ###   ########.fr       */
+/*   Updated: 2024/04/02 12:21:10 by maabdull         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,11 @@ int	init_data(t_data *data)
 	pthread_mutex_init(&data->stop_lock, NULL);
 	pthread_mutex_init(&data->meal_update_lock, NULL);
 	if (init_forks(data) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
+		return (free_data(data), EXIT_FAILURE);
 	init_philos_data(data);
 	if (pthread_create(&data->monitor, NULL, monitor_routine, data->philos))
-		return (EXIT_FAILURE);
+		return (free_data(data), EXIT_FAILURE);
 	if (init_philos(data) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
+		return (free_data(data), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
